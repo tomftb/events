@@ -1,0 +1,117 @@
+<?xml version="1.0" standalone="yes"?>
+<DSFakturaVAT xmlns="http://tempuri.org/DSFakturaVAT.xsd">
+  <FVL_FakturyVATLinijki>
+    <FVL_ID>200000000338</FVL_ID>
+    <FVL_ARTID>100002</FVL_ARTID>
+    <FVL_NazwaArtykulu>Usługa hotelowa 8% </FVL_NazwaArtykulu>
+    <FVL_NrPozycji>1</FVL_NrPozycji>
+    <FVL_VATSymbol>8% </FVL_VATSymbol>
+    <FVL_VATProcent>8.000</FVL_VATProcent>
+    <FVL_Ilosc>1.000000</FVL_Ilosc>
+    <FVL_JMM>szt</FVL_JMM>
+    <FVL_CenaNettoJMM>441.67</FVL_CenaNettoJMM>
+    <FVL_CenaBruttoJMM>477.00</FVL_CenaBruttoJMM>
+    <FVL_CenaWWalucieNettoJMM>441.67</FVL_CenaWWalucieNettoJMM>
+    <FVL_CenaWWalucieBruttoJMM>477.00</FVL_CenaWWalucieBruttoJMM>
+    <FVL_ProcentRabatu>0.000</FVL_ProcentRabatu>
+    <FVL_CzyKorygowana>false</FVL_CzyKorygowana>
+    <FVL_CzySpecyfikacjaZaliczki>false</FVL_CzySpecyfikacjaZaliczki>
+    <FVL_Opis />
+    <ART_Nr>1</ART_Nr>
+    <ART_PKWiU />
+    <ART_CzyOpakowanieZwrotne>false</ART_CzyOpakowanieZwrotne>
+    <DSL_Zawartosc>1.000</DSL_Zawartosc>
+    <FVL_DSLID>200000001961</FVL_DSLID>
+    <IloscLinijek>3</IloscLinijek>
+    <VAT>35.33</VAT>
+    <FVL_CzyZafiskalizowana>false</FVL_CzyZafiskalizowana>
+    <FVL_CzyWybrana>false</FVL_CzyWybrana>
+    <KodPaskowy />
+    <Skrot>Nocleg w pokoju 2 os.</Skrot>
+    <PKWIU />
+    <Producent />
+    <FVL_CenaNominalnaBrutto>477.00</FVL_CenaNominalnaBrutto>
+    <DSSID>0</DSSID>
+    <FVL_Koszt>0.00</FVL_Koszt>
+    <KodTowaruUOdbiorcy />
+    <FVL_DSLDSRID>200000001847</FVL_DSLDSRID>
+    <Nazwa2 />
+    <Nazwa3 />
+    <FVL_Wartosc>477.00000000</FVL_Wartosc>
+  </FVL_FakturyVATLinijki>
+  <FVN_FakturyVATNaglowki>
+    <FVN_ID>200000000310</FVN_ID>
+    <FVN_FVNIDKorygowanej>0</FVN_FVNIDKorygowanej>
+    <FVN_FVGID>0</FVN_FVGID>
+    <FVN_FVRID>2</FVN_FVRID>
+    <FVN_KONID>201242</FVN_KONID>
+    <FVN_KDDID>200428</FVN_KDDID>
+    <FVN_OPRID>100002</FVN_OPRID>
+    <FVN_FPLID>3</FVN_FPLID>
+    <FVN_SSPID>1</FVN_SSPID>
+    <FVN_NrDokumentu>360</FVN_NrDokumentu>
+    <FVN_PelnyNrDokumentu> 0360/2019/PORT</FVN_PelnyNrDokumentu>
+    <FVN_ProcentRabatu>0.000</FVN_ProcentRabatu>
+    <FVN_KursWaluty>1.000000</FVN_KursWaluty>
+    <FVN_Waluta>PLN</FVN_Waluta>
+    <FVN_DataUtworzenia>2019-10-24T11:38:00+02:00</FVN_DataUtworzenia>
+    <FVN_DataModyfikacji>2019-10-24T11:38:00+02:00</FVN_DataModyfikacji>
+    <FVN_DataDokumentu>2019-10-24T00:00:00+02:00</FVN_DataDokumentu>
+    <FVN_DataSprzedazy>2019-10-24T00:00:00+02:00</FVN_DataSprzedazy>
+    <FVN_TerminPlatnosci>2019-10-31T00:00:00+01:00</FVN_TerminPlatnosci>
+    <FVN_CzyDoParagonu>false</FVN_CzyDoParagonu>
+    <FVN_CzyAnulowana>false</FVN_CzyAnulowana>
+    <FVN_OpisDokumentu />
+    <FVN_CzyZaliczkowa>false</FVN_CzyZaliczkowa>
+    <FVN_CzyBrutto>true</FVN_CzyBrutto>
+    <FVN_DataWplywu>2019-10-24T00:00:00+02:00</FVN_DataWplywu>
+    <FVN_FVTID>1</FVN_FVTID>
+    <FVN_FPLNazwa>Przelew</FVN_FPLNazwa>
+    <FVN_CzyMaKorekte>false</FVN_CzyMaKorekte>
+    <OPR_ImieiNazwisko>Daria Koszela</OPR_ImieiNazwisko>
+    <FVN_NumeryRachunkow> 1772 1773 1771</FVN_NumeryRachunkow>
+    <FVN_FormyPlatnosciRachunkow />
+    <FVN_KontoBankowe />
+    <FVN_PowiazaneWZ />
+    <FVN_RADIDWydruku>200003</FVN_RADIDWydruku>
+    <FVN_CENID>0</FVN_CENID>
+    <FVN_FVSID>1</FVN_FVSID>
+    <FVN_OpisTabeliKursowej> / 2010-01-01</FVN_OpisTabeliKursowej>
+    <FVN_DOGID>0</FVN_DOGID>
+    <FVN_FRBID>0</FVN_FRBID>
+    <FVN_FVNIDProformy>0</FVN_FVNIDProformy>
+    <SSP_Nazwa>RECEPCJA 1</SSP_Nazwa>
+  </FVN_FakturyVATNaglowki>
+  <KDD_KontrahenciDoDokumentow>
+    <KDD_ID>200428</KDD_ID>
+    <KDD_KONID>201242</KDD_KONID>
+    <KDD_Nazwa1>GEOFIZYKA TORUŃ SPÓŁKA AKCYJNA</KDD_Nazwa1>
+    <KDD_Nazwa2 />
+    <KDD_Adres1>ul. Bolesława Chrobrego 50</KDD_Adres1>
+    <KDD_Adres2 />
+    <KDD_Miasto>Toruń</KDD_Miasto>
+    <KDD_KodPocztowy>87-100    </KDD_KodPocztowy>
+    <KDD_NIP>879-20-46-601</KDD_NIP>
+    <KDD_EUNIP />
+    <KDD_Dokument />
+    <KDD_Wydany>2019-10-23 </KDD_Wydany>
+    <KDD_Konto />
+    <KDD_Skrot>879-20-46-601</KDD_Skrot>
+    <KDD_Email />
+    <KDD_Telefon />
+    <KDD_Opis>REGON 87063699700000</KDD_Opis>
+    <KDD_Panstwo>Polska</KDD_Panstwo>
+    <KDD_Imie />
+    <KDD_Nazwisko>GEOFIZYKA TORUŃ SPÓŁKA AKCYJNA</KDD_Nazwisko>
+    <KDD_CzyWyslane>false</KDD_CzyWyslane>
+  </KDD_KontrahenciDoDokumentow>
+  <FVZ_FakturyVATZaplaty>
+    <FVZ_ID>200000000310</FVZ_ID>
+    <FVZ_FPLID>3</FVZ_FPLID>
+    <FVZ_Kwota>477.00</FVZ_Kwota>
+    <FVZ_Termin>2019-10-31T00:00:00+01:00</FVZ_Termin>
+    <FVZ_CzyZaplacone>false</FVZ_CzyZaplacone>
+    <FVZ_CzyWolnoEdytowac>true</FVZ_CzyWolnoEdytowac>
+    <FVZ_NazwaFP>Przelew</FVZ_NazwaFP>
+  </FVZ_FakturyVATZaplaty>
+</DSFakturaVAT>

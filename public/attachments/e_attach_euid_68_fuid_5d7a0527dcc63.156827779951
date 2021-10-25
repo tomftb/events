@@ -1,0 +1,152 @@
+Return-Path: <faktury@geofizyka.pl>
+Received: from localhost (mail [127.0.0.1])
+	by mail.geofizyka.pl (Postfix) with ESMTP id F06444049F7
+	for <leftheand%40wp@2Epl>; Thu, 12 Sep 2019 10:43:16 +0200 (CEST)
+X-Virus-Scanned: GT AV check at geofizyka.pl
+Received: from mail.geofizyka.pl ([127.0.0.1])
+	by localhost (mail.geofizyka.pl [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id NmyBdpG6FNlJ for <leftheand%40wp@2Epl>;
+	Thu, 12 Sep 2019 10:43:16 +0200 (CEST)
+Received: from localhost ([127.0.0.1])
+	(Authenticated sender: hidden)
+	by mail.geofizyka.pl (Postfix) with ESMTPA id 932D24047DA
+	for <leftheand%40wp%2Epl>; Thu, 12 Sep 2019 10:43:16 +0200 (CEST)
+Authentication-Results: mail; dmarc=fail header.from=geofizyka.pl
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=geofizyka.pl;
+	s=geofizyka; t=1568277796;
+	bh=bl6Fqgf001gyA8zTaovdI7gvC1C4TUK52IWCWjO6x6o=;
+	h=Date:From:To:Subject:Reply-To:From;
+	b=Y2ZJ7vNC1AmzYWMmDQiy5OXnp6i8ejUrEUb8k8dAu7e3CQA/AD4Sp0FNLpdIR3xs5
+	 v3iRLcnAiQ/1Lm475cGKzKrgnc39I8jsUezSSjIH6QG39G6BBnhsomqqLo5yeCKdqe
+	 Sfr6mTY+dxoVkJl3oGdAqt3p7wIL9TagV5hoKQtY=
+Date: Thu, 12 Sep 2019 10:43:15 +0200
+From: "Kancelaria GT" <faktury@geofizyka.pl>
+To: leftheand%40wp@2Epl
+Subject: =?UTF-8?Q?dfgdf?=
+Reply-To: <faktury@geofizyka.pl>
+User-Agent: KancelariaGT
+X-Sender: faktury@geofizyka.pl
+X-Mailer: KancelariaGT
+X-Priority: 3 (Normal)
+Message-ID: <5d7a0523892a7@geofizyka.pl>
+Mime-Version: 1.0
+Content-Type: multipart/alternative; boundary="B_ALT_5d7a0523892b8"
+
+This is a multi-part message in MIME format.
+Your email application may not support this format.
+
+--B_ALT_5d7a0523892b8
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+--
+ Kancelaria GT
+ tel.: +48 566692101
+
+
+ Geofizyka Toruń S.A.Chrobrego 5087–100 Toruń, Poland
+ www.GTservices.pl
+
+
+
+
+
+ Spółka akcyjna zarejestrowana w Krajowym Rejestrze Sądowym prowadzonym
+przez Sąd Rejonowy w Toruniu, VII Wydział Gospodarczy pod nr KRS
+0000425970, NIP: 879-20-46-601, Kapitał zakładowy: 75 240 000 PLN
+wpłacony w całości. The joint-stock company entered into the National
+Court Register, maintained by the District Court for Toruń, VII Commercial
+Division, under entry No. KRS 0000425970, Tax Identification Number (NIP):
+PL 879-20-46-601, Paid-up Initial Capital: PLN 75 240 000.
+ Przeczytaj dwa razy zanim wydrukujesz tę wiadomość – chroń Ziemię.
+Read twice before printing – save the Planet.
+ Niniejsza wiadomość może zawierać informacje prawnie chronione.
+Wiadomość skierowana jest wyłącznie do adresata / adresatów
+określonych wyżej i stanowi własność nadawcy. Odbiorca, który
+otrzymał tę wiadomość przypadkowo, proszony jest o jej nie
+rozpowszechnianie, a następnie poinformowanie nadawcy i jej usunięcie.
+Rozpowszechnianie, kopiowanie, ujawnianie lub przekazywanie osobom trzecim w
+jakiejkolwiek formie informacji zawartych w niniejszej wiadomości w
+całości lub części jest zakazane.
+ The information contained in this message may be privileged and
+confidential and protected from disclosure. Information included in that
+message is addressed only to the addressee/addressees determined above and
+is the property of the sender. If you have received this communication in
+error, please notify the sender immediately by replying to the message and
+deleting it from your computer. Any dissemination, distribution or copying
+of this communication to the third parties is strictly prohibited.
+
+
+--B_ALT_5d7a0523892b8
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+=3Cbr/=3E--=3Cbr/=3E=3Ctable cellspacing=3D=220=22 cellpadding=3D=220=22 cl=
+ass=3D=22lato=22 border=3D=220=22 width=3D=22640px=22 style=3D=22margin: 0=
+=3B=22=3E
+ =3Ctbody=3E=3Ctr=3E=3Ctd style=3D=22padding: 0=3B=22=3E=3Cp style=3D=22fon=
+t-size: 16px=3Bcolor:=23333333=3Bline-height: 20px=3B font-weight: bold=3B =
+font-family: Lato, Arial=3B=22 class=3D=22imie=5Fnazwisko szary=22=3EKancel=
+aria GT
+ =3C/p=3E=3C/td=3E=3C/tr=3E=3Ctr=3E=3Ctd style=3D=22padding: 0=3B=22=3E=3Cp=
+ style=3D=22margin: 10px 0=3Bfont-size: 14px=3Bfont-weight:300=3Bline-heigh=
+t:17px=3Btext-align: justify=3Bcolor:=23333333=3Bfont-family: Lato, Arial=
+=3B=22=3Etel.: +48 566692101=3C/p=3E
+ =3C/td=3E=3C/tr=3E=3Ctr=3E=3Ctd style=3D=22padding: 0=3B=22=3E
+ =3Cp style=3D=22margin: 0 0 13px 0=3Bfont-size: 14px=3Bfont-weight:300=3Bl=
+ine-height:17px=3Btext-align: justify=3Bcolor:=23333333=3Bfont-family: Lato=
+, Arial=3B=22 class=3D=22MsoNormal=22=3E
+ Geofizyka Toru=C5=84 S.A.=3Cbr=3EChrobrego 50=3Cbr=3E87=E2=80=93100 Toru=
+=C5=84, Poland=3Cbr=3E
+ =3Ca target=3D=22=5Fblank=22 href=3D=22http://www.GTservices.pl=22 style=
+=3D=22color: =23000000=3B text-decoration: none=3B=22=3E=3Cspan style=3D=22=
+margin: 10px 0=3Bfont-size: 14px=3Bfont-weight:300=3Bline-height:17px=3Btex=
+t-align: justify=3Bcolor:=23333333=3Bfont-family: Lato, Arial=3B=22=3Ewww.G=
+Tservices.pl=3C/span=3E=3C/a=3E
+ =3C/p=3E=3C/td=3E=3C/tr=3E=3Ctr=3E=3Ctd style=3D=22padding: 0=3B=22=3E
+ =3Cdiv style=3D=22width:640px=3Bborder:0px solid black=3B=22=3E
+ =3Cdiv style=3D=22display:block=3B float:left=3B width:416px=3B border:1px=
+ solid =2368b42e=3B margin-left:0px=3B margin-top:0px=3B padding:0px 0px 0p=
+x 0px=3B=22=3E=3C/div=3E
+ =3Cdiv style=3D=22display:block=3B float:left=3B width:220px=3B border:1px=
+ solid =23f39200=3B margin-right:0px=3B margin-top:0px=3B padding:0px 0px 0=
+px 0px=3B=22=3E=3C/div=3E
+ =3C/div=3E=3C/td=3E=3C/tr=3E=3Ctr=3E=3Ctd style=3D=22padding: 0=3Bfont-wei=
+ght: 300=3Bfont-family: Lato, Arial=3B font-size: 11px=3B=22=3E
+ =3Cp style=3D=22margin: 10px 0=3Bcolor: =23666666=3Bfont-size: 11px=3Bfont=
+-weight:300=3Bline-height:15px=3Btext-align: justify=3B=22=3ESp=C3=B3=C5=82=
+ka akcyjna zarejestrowana w Krajowym Rejestrze S=C4=85dowym prowadzonym prz=
+ez S=C4=85d Rejonowy w Toruniu, VII Wydzia=C5=82 Gospodarczy pod nr KRS 000=
+0425970, NIP: 879-20-46-601, Kapita=C5=82 zak=C5=82adowy: 75 240 000 PLN wp=
+=C5=82acony w ca=C5=82o=C5=9Bci. =3Cbr=3EThe joint-stock company entered in=
+to the National Court Register, maintained by the District Court for Toru=
+=C5=84, VII Commercial Division, under entry No. KRS 0000425970, Tax Identi=
+fication Number (NIP): PL 879-20-46-601, Paid-up Initial Capital: PLN 75 24=
+0 000. =3C/p=3E
+ =3Cp style=3D=22margin: 10px 0=3Bcolor: =23666666=3Bfont-size: 11px=3Bfont=
+-weight:300=3Bline-height:15px=3Btext-align: justify=3B=22=3EPrzeczytaj dwa=
+ razy zanim wydrukujesz t=C4=99 wiadomo=C5=9B=C4=87 =E2=80=93 chro=C5=84 Zi=
+emi=C4=99. Read twice before printing =E2=80=93 save the Planet.=3C/p=3E
+ =3Cp style=3D=22margin: 10px 0=3Bcolor: =23666666=3Bfont-size: 11px=3Bfont=
+-weight:300=3Bline-height:15px=3Btext-align: justify=3B=22=3ENiniejsza wiad=
+omo=C5=9B=C4=87 mo=C5=BCe zawiera=C4=87 informacje prawnie chronione. Wiado=
+mo=C5=9B=C4=87 skierowana jest wy=C5=82=C4=85cznie do adresata / adresat=C3=
+=B3w okre=C5=9Blonych wy=C5=BCej i stanowi w=C5=82asno=C5=9B=C4=87 nadawcy.=
+ Odbiorca, kt=C3=B3ry otrzyma=C5=82 t=C4=99 wiadomo=C5=9B=C4=87 przypadkowo=
+, proszony jest o jej nie rozpowszechnianie, a nast=C4=99pnie poinformowani=
+e nadawcy i jej usuni=C4=99cie. Rozpowszechnianie, kopiowanie, ujawnianie l=
+ub przekazywanie osobom trzecim w jakiejkolwiek formie informacji zawartych=
+ w niniejszej wiadomo=C5=9Bci w ca=C5=82o=C5=9Bci lub cz=C4=99=C5=9Bci jest=
+ zakazane.=3C/p=3E
+ =3Cp style=3D=22margin: 10px 0=3Bcolor: =23666666=3Bfont-size: 11px=3Bfont=
+-weight:300=3Bline-height:15px=3Btext-align: justify=3B=22=3EThe informatio=
+n contained in this message may be privileged and confidential and protecte=
+d from disclosure. Information included in that message is addressed only t=
+o the addressee/addressees determined above and is the property of the send=
+er. If you have received this communication in error, please notify the sen=
+der immediately by replying to the message and deleting it from your comput=
+er. Any dissemination, distribution or copying of this communication to the=
+ third parties is strictly prohibited.=3C/p=3E
+ =3C/td=3E=3C/tr=3E=3C/tbody=3E=3C/table=3E
+
+--B_ALT_5d7a0523892b8--

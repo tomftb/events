@@ -1,0 +1,2 @@
+[08.01.219] workflow
+contman - akt + scan lub sam scan
