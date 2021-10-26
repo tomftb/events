@@ -58,7 +58,21 @@ class Event_model extends CI_Model
         return $msg;
     }
     public function sign(){
-        log_message('debug', "[".__METHOD__."]");
+        
+        log_message('debug', "[".__METHOD__."] SESSION NR EWID => ".$this->session->nrewid);
+        /* CHECK EVENT */
+        $event = self::checkEvent($this->input->post('event'));
+        /* GET EVENT FIELDS */
+        $event_fields = $this->db->query("SELECT `id`,`name` FROM `events_details` WHERE `id_event`=".$this->input->post('event')." AND `req`='y'")->result_array();
+        /* CHECK EVENT COVID */
+        if($this->input->post('covid')!=='y'){
+            Throw new Exception('Brak zaznaczonej deklaracji COVID-19',-1);
+        }
+        if(trim($this->session->nrewid)===''){
+            Throw new Exception('Użytkownik nie ma wprowadzonego numeru ewidencyjnego w Active Directory',-1);
+        }
+        $event_record=$this->db->query("SELECT `id`,`status` FROM `events_recipient` WHERE `recipient_nrewid`=".$this->session->nrewid." AND `id_event`=".intval($this->input->post('event'),10)." ")->row();
+        
         print_r($this->input->post('value'));
         foreach($this->input->post() as $k => $v){
             log_message('debug', "[".__METHOD__."] K $k => V ".$v);
@@ -92,9 +106,15 @@ class Event_model extends CI_Model
         }
         return ($events);
     }
-    public function getEvent($id=1)
+    public function getEvent($id=0)
     {
         log_message('debug', "[".__METHOD__."] CURRENT DATE TIME - ".$this->timestamp);
+        $event = self::checkEvent($id);
+        /* SETUP USER READ STATUS */
+        return (array('event'=>$event,'status'=>''));
+    }
+    private function checkEvent($id=0){
+        log_message('debug', "[".__METHOD__."] EVENT ID => ${id}");
         $event = $this->db->query("SELECT e.id,e.temat,e.tresc,e.autor,e.autor_email,e.data_koniec,FROM_UNIXTIME(e.data_koniec) as koniec,e.wsk_u,er.`status` as `recipient_status`,er.`id` as recipient_id FROM events e left join events_recipient er on er.id_event=e.id AND er.recipient_nrewid=".$this->session->nrewid." WHERE e.id=${id}")->row();
         if(!$event){
             Throw new Exception('Wydarzenie nie istnieje!',-1);
@@ -106,7 +126,6 @@ class Event_model extends CI_Model
             Throw new Exception('Przekroczono termin zapisu!',-1);
         }
         unset($event->wsk_u);
-        /* SETUP USER READ STATUS */
-        return (array('event'=>$event,'status'=>''));
+        return $event;
     }
 }

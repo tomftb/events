@@ -23,7 +23,7 @@ class Event extends CI_Controller{
             $this->Event_model->sign();
         }
         catch(Exception $e){
-            self::returnJson(array('status'=>$e->getMessage())); 
+             self::returnJson(self::checkErrorCode($e->getCode(),$e->getMessage())); 
         }
     }
 

@@ -259,8 +259,8 @@ function checkEventStatus(modal,data){
     return true;
 }
 function checkEventRecord(data){
-    var yes='<button class="btn btn-primary" onClick="sign('+data.event.id+',\'y\')">Zapisz mnie</button></div>';
-    var no='<button class="btn btn-danger" onClick="sign('+data.event.id+',\'n\')">Wypisz mnie</button></div>';
+    var yes='<button class="btn btn-primary" onClick="sign('+data.event.id+')">Zapisz mnie</button></div>';
+    var no='<button class="btn btn-danger" onClick="sign('+data.event.id+')">Wypisz mnie</button></div>';
     if(data.event.recipient_id===null || (data.event.recipient_id!==null && data.event.recipient_status!=='y')){
         return yes; 
     }
@@ -394,13 +394,13 @@ function checkSignAnswear(data){
     console.log(data);
     
 }
-function sign(eventId,record){
+function sign(eventId){
     console.log('---signUp()---');
+    /* check covid */
     var value={
         covid:'y',
         transport:'n',
-        event:eventId,
-        sign:record
+        event:eventId
     };
     ajax('eventSign','checkSignAnswear','POST',value);
 }
