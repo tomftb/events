@@ -24,44 +24,7 @@ class Json extends CI_Controller
     {
         $output = $this->output->set_content_type('application/json');
         return ( $output->set_output(json_encode($response)));
-    }
-    public function getEventRecipient($id=1)
-    {
-        if($this->session->login==''){ return ( $this->returnJson($this->checkSession(__METHOD__))); }
-        $output = $this->output->set_content_type('application/json');
-        //  AND e.data_koniec>=".now()."
-        $this->message['data'] = $this->db->query("SELECT er.`recipient_nrewid` as \"NR EWID\",er.`recipient_name` as \"Osoba\",er.`recipient_email` AS \"Email\", (CASE WHEN `status` ='y' THEN \"TAK\" ELSE \"NIE\" END) AS \"Status\" FROM events_recipient er, events e WHERE e.`id`=".$id." AND e.`id`=er.`id_event` AND e.wsk_u='0' order by er.`recipient_name`")->result_array();
-        return $output->set_output(json_encode( $this->message));
-    }
-    public function getEvents($idcat=1)
-    {
-        if($this->session->login==''){ return ( $this->returnJson($this->checkSession(__METHOD__))); }
-        log_message('debug', "[".__METHOD__."] ID EVENT CATEGORY - ".$idcat);
-        $output = $this->output->set_content_type('application/json');
-        $message = $this->getEventsData($idcat);
-        return $output->set_output(json_encode($message));
-    }
-    private function getEventsData($idcat)
-    {
-        log_message('debug', "[".__METHOD__."] SHORTCUT - ".$this->categoryShortcut);
-        // datetime
-        $current_unix_dt=gmdate("Y-m-d\TH:i:s\Z", now());
-        log_message('debug', "[".__METHOD__."] CURRENT DATE TIME - ".now());
-        log_message('debug', "[".__METHOD__."] CURRENT DATE TIME - ".$current_unix_dt);
-        
-        // REMOVE DATE TO SEE EVENTS, DISABLE BUTTON ON VIEW
-        // e.data_koniec>=".now()." AND
-        $query = $this->db->query("SELECT e.id,e.temat,e.autor,e.autor_email,e.odbiorca,e.odbiorca_email,e.tresc,FROM_UNIXTIME(e.data_koniec) as data_koniec,data_dod  as data_dod,e.wsk_r,(select er.status from events_recipient er where er.id_event=e.id AND er.recipient_nrewid=".$this->session->nrewid." ) as status FROM events e WHERE  e.wsk_u='0' AND e.id_cat=$idcat order by e.id desc");
-        
-        $events=$query->result_array();
-        foreach($events as $k => $v)
-        {
-            //echo $k."<br/>".$v['tresc']."<br/>";
-            $events[$k]['temat']=html_entity_decode($v['temat'],ENT_QUOTES);
-            $events[$k]['tresc']=html_entity_decode($v['tresc'],ENT_QUOTES); 
-        }
-        return ($events);
-    }
+    }  
     public function getUsers()
     {
         if($this->session->login==''){ return ( $this->returnJson($this->checkSession(__METHOD__))); }

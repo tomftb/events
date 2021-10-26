@@ -2,6 +2,7 @@
 class Event_model extends CI_Model
 {
     private $now='';
+    private $timestamp='';
     public function __construct()
     {
         parent::__construct();
@@ -9,65 +10,103 @@ class Event_model extends CI_Model
         $this->load->helper('url');
         $this->load->library('session');
         $this->now= date("Y-m-d H:i:s");  
+        $this->timestamp=strtotime($this->now);
     }
     public function changeUserEventStatus($id)
     {
-        //check messages
-        log_message('debug', "[".__METHOD__."] EVENT ID => ".$id." USER NREWID => ".$this->session->nrewid." USER NAME => ".$this->session->fullame." USER EMAIL => ".$this->session->email." DATE TIME => ".$this->now);
-        // check event exist
-        $user_status_event='n';
-        if($this->db->query("SELECT  * FROM `events` WHERE `id`=${id}")->num_rows()<1)
-        {
-            log_message('debug', "[".__METHOD__."] EVENT (${id}) NOT EXIS");
-            return 'Wydarzenie ('.$id.') nie istnieje!';
-            
-        }
-        if($this->db->query("SELECT  * FROM `events` WHERE data_koniec>=".now()." AND `id`=${id}")->num_rows()<1)
-        {
-            log_message('debug', "[".__METHOD__."] EVENT (${id}) DATA END LOWER THAN NOW()");
-            return 'Upłynął termin zapisu na wydarzenie ('.$id.')!';
-            
-        }
-        $exist = $this->db->query("SELECT  `id` FROM `events_recipient` WHERE `id_event`=${id} AND `recipient_nrewid`=\"".$this->session->nrewid."\"  ")->num_rows();
-        log_message('debug', "[".__METHOD__."] EVENT CURRENT USER ROWS IN DB => ".$exist);
-
-        $msg='Zapisałeś się na wydarzenie!';
-        if($exist<1)
-        {
-            // UZYTKOWNIK NIE ZAPISANY
-            log_message('debug', "[".__METHOD__."] ADD USER ".$this->session->nrewid." TO EVENT ($id)");
-            $this->db->query('INSERT INTO `events_recipient` (`id_event`,`recipient_nrewid`,`recipient_name`,`recipient_email`,`recipient_email_login`)VALUES('.$id.',"'.$this->session->nrewid.'","'.$this->session->fullname.'","'.$this->session->email.'","'.$this->session->email_login.'")'); 
-            return $msg;
-        }
-        else
-        {
-            // check status
-            $status = $this->db->query("SELECT `status` as status FROM `events_recipient` WHERE `id_event`=${id} AND `recipient_nrewid`='".$this->session->nrewid."' ")->row();
-            if($status->status=='n')
-            {
-                $user_status_event='y';
+        try{
+            //check messages
+            log_message('debug', "[".__METHOD__."]\r\nEVENT ID => ".$id."\r\nUSER NR EWID => ".$this->session->nrewid."\r\nUSER NAME => ".$this->session->fullame."\r\nUSER EMAIL => ".$this->session->email."\r\nDATE TIME => ".$this->now."\r\nTIMESTAMP => ".$this->timestamp);
+            // check event exist
+            $user_status_event='n';
+            if($this->db->query("SELECT  * FROM `events` WHERE `id`=${id}")->num_rows()<1){
+                log_message('debug', "[".__METHOD__."] EVENT (${id}) NOT EXIS");
+                return 'Wydarzenie ('.$id.') nie istnieje!';
             }
-            else
-            {
-                $user_status_event='n';
-                $msg='Wypisałeś się z wydarzenia!';
+            if($this->db->query("SELECT  * FROM `events` WHERE data_koniec>=".$this->timestamp." AND `id`=${id}")->num_rows()<1){
+                log_message('debug', "[".__METHOD__."] EVENT (${id}) DATA END LOWER THAN NOW()");
+                return 'Upłynął termin zapisu na wydarzenie ('.$id.')!';
             }
-            log_message('debug', "[".__METHOD__."] CHANGE USER EVENT ($id) STATUS TO => ".$user_status_event);
+            $exist = $this->db->query("SELECT  `id` FROM `events_recipient` WHERE `id_event`=${id} AND `recipient_nrewid`=\"".$this->session->nrewid."\"  ")->num_rows();
+            log_message('debug', "[".__METHOD__."] EVENT CURRENT USER ROWS IN DB => ".$exist);
+            $msg='Zapisałeś się na wydarzenie!';
+            if($exist<1){
+                // UZYTKOWNIK NIE ZAPISANY
+                log_message('debug', "[".__METHOD__."] ADD USER ".$this->session->nrewid." TO EVENT ($id)");
+                $this->db->query('INSERT INTO `events_recipient` (`id_event`,`recipient_nrewid`,`recipient_name`,`recipient_email`,`recipient_email_login`)VALUES('.$id.',"'.$this->session->nrewid.'","'.$this->session->fullname.'","'.$this->session->email.'","'.$this->session->email_login.'")'); 
+                return $msg;
+            }
+            else{
+                // check status
+                $status = $this->db->query("SELECT `status` as status FROM `events_recipient` WHERE `id_event`=${id} AND `recipient_nrewid`='".$this->session->nrewid."' ")->row();
+                if($status->status==='n'){
+                    $user_status_event='y';
+                }
+                else{
+                    $user_status_event='n';
+                    $msg='Wypisałeś się z wydarzenia!';
+                }
+                log_message('debug', "[".__METHOD__."] CHANGE USER EVENT ($id) STATUS TO => ".$user_status_event);
+            }
+            $this->db->query('UPDATE `events_recipient` SET `status`="'.$user_status_event.'",`mod_dat`="'.$this->now.'" WHERE `id_event`='.$id.' AND `recipient_nrewid`="'.$this->session->nrewid.'"'); 
+            throw Exception ('asdasd');
         }
-        $this->db->query('UPDATE `events_recipient` SET `status`="'.$user_status_event.'",`mod_dat`="'.$this->now.'" WHERE `id_event`='.$id.' AND `recipient_nrewid`="'.$this->session->nrewid.'"'); 
+        catch(Exception $e){
+            log_message('debug', "[".__METHOD__."]\r\nERROR CODE:".$e->getCode()."\r\nERROR MESSAGE: ".$e->getMessage());
+            return 'ERROR';
+        }
         return $msg;
     }
-    public function getEventData($id)
+    public function sign(){
+        log_message('debug', "[".__METHOD__."]");
+        print_r($this->input->post('value'));
+        foreach($this->input->post() as $k => $v){
+            log_message('debug', "[".__METHOD__."] K $k => V ".$v);
+        }
+    }
+    private function up(){
+        log_message('debug', "[".__METHOD__."]");
+       
+        //throw new Exception ('asdsadas',-1);
+    }
+    private function off(){
+        log_message('debug', "[".__METHOD__."]");
+        //throw new Exception ('asdsadas',-1);
+    }
+    public function getEventRecipient($id)
     {
         log_message('debug', "[".__METHOD__."] EVENT ID => ".$id);
-        $email_tresc_col='email_nie';
-        $status = $this->db->query("SELECT `status` as status FROM `events_recipient` WHERE `id_event`=${id} AND `recipient_nrewid`='".$this->session->nrewid."' ")->row();
-        log_message('debug', "[".__METHOD__."] USER STATUS => ".$status->status);
-        if($status->status=='y')
-        {
-             $email_tresc_col='email_tak';
+        $event=$this->db->query("SELECT `temat`,`autor`,`autor_email`,`odbiorca`,`odbiorca_email` FROM `events` WHERE `id`=${id} ")->row();
+        $recipient=$this->db->query("SELECT `recipient_nrewid`,`recipient_name`,`recipient_email` FROM `events_recipient` WHERE `id_event`=${id} AND `status`='y' ")->result_array();
+        return array('event'=>$event,'recipient'=>$recipient);
+    
+    }
+    public function getEvents($idcat=1)
+    {
+        log_message('debug', "[".__METHOD__."] CURRENT DATE TIME - ".$this->timestamp);
+        $query = $this->db->query("SELECT e.id,e.temat,e.autor,e.autor_email,e.odbiorca,e.odbiorca_email,FROM_UNIXTIME(e.data_koniec) as data_koniec,data_dod  as data_dod,(select er.status from events_recipient er where er.id_event=e.id AND er.recipient_nrewid=".$this->session->nrewid." ) as status FROM events e WHERE  e.data_koniec>=".$this->timestamp." AND e.wsk_u='0' AND e.id_cat=$idcat order by e.id desc");
+        $events=$query->result_array();
+        foreach($events as $k => $v){
+            $events[$k]['temat']=html_entity_decode($v['temat'],ENT_QUOTES);
+            $events[$k]['tresc']=html_entity_decode($v['tresc'],ENT_QUOTES); 
         }
-        return ($this->db->query("SELECT CONCAT('(', `temat`,') ',`email_tytul`) as `temat`,`odbiorca`,`odbiorca_email`,`".$email_tresc_col."` as 'wiadomosc' FROM `events` WHERE `id`=${id}")->result_array());
-        // check event exist
+        return ($events);
+    }
+    public function getEvent($id=1)
+    {
+        log_message('debug', "[".__METHOD__."] CURRENT DATE TIME - ".$this->timestamp);
+        $event = $this->db->query("SELECT e.id,e.temat,e.tresc,e.autor,e.autor_email,e.data_koniec,FROM_UNIXTIME(e.data_koniec) as koniec,e.wsk_u,er.`status` as `recipient_status`,er.`id` as recipient_id FROM events e left join events_recipient er on er.id_event=e.id AND er.recipient_nrewid=".$this->session->nrewid." WHERE e.id=${id}")->row();
+        if(!$event){
+            Throw new Exception('Wydarzenie nie istnieje!',-1);
+        }
+        if($event->wsk_u!=='0'){
+            Throw new Exception('Wydarzenie zostało usunięte!',-1);
+        }
+        if($this->timestamp>$event->data_koniec){
+            Throw new Exception('Przekroczono termin zapisu!',-1);
+        }
+        unset($event->wsk_u);
+        /* SETUP USER READ STATUS */
+        return (array('event'=>$event,'status'=>''));
     }
 }

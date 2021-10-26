@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+$uid=uniqid();
+?>
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -26,12 +29,12 @@
 <meta name="theme-color" content="#ffffff">
 <!-- KONIEC IKONKA GT -->
 <!-- CSS -->
-<link rel="stylesheet" href="<?=$url?>css/gt-admin.css" >
+<link rel="stylesheet" href="<?=$url?>css/gt-admin.css?<?=$uid?>" >
 <link rel="stylesheet" href="<?=$url?>css/bootstrap.min.4.1.1.css" >
 <link rel="stylesheet" href="<?=$url?>css/bootstrap-datepicker.min.css" >
 <link rel="stylesheet" href="<?=$url?>css/font-awesome.min.4.7.0.css" >
 <link rel="stylesheet" href="<?=$url?>css/bootstrap-datepicker3.css" >
-<link rel="stylesheet" href="<?=$url?>css/header.css" >
+<link rel="stylesheet" href="<?=$url?>css/header.css?<?=$uid?>" >
 <link rel="stylesheet" type="text/css" href="<?=$url?>js/datatables.min.css"/>
 <!-- END CSS -->
 <!-- JS -->
@@ -78,7 +81,7 @@
             </div>
         </div>
 </header><!-- #header -->
-<SCRIPT type="text/javascript" src="<?php echo $url; ?>js/headerView.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="<?php echo $url; ?>js/headerView.js?<?=$uid?>"></SCRIPT>
 <script>window.acl = <?= json_encode($acl)?>;</script>
 <SCRIPT type="text/javascript" src="<?php echo $js_setuserpermission; ?>"></SCRIPT>
 <script type="text/javascript" src="<?=$js_createhtmlelement?>"></script>

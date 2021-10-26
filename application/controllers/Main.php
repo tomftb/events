@@ -1,12 +1,14 @@
 <?php
 class Main extends CI_Controller
 {
+    private $uid='';
     public function __construct()
     {
         parent::__construct();
         $this->load->helper('url');
         $this->load->library('session');
         $this->load->model('Main_model');
+        $this->uid=uniqid();
     }
     private $NaglowekDane=array(
         'app_name'=>'GT-Events',
@@ -28,7 +30,7 @@ class Main extends CI_Controller
         $this->checkSession();
         $this->userData=$this->Main_model->getUserData($this->session->userid);
         $this->setDefNgDane();
-        $this->NaglowekDane['js']=base_url()."js/main.js";
+        $this->NaglowekDane['js']=base_url()."js/main.js?".$this->uid;
         $this->NaglowekDane['emails_cat']=$this->Main_model->getEmailsCategory();
         $this->NaglowekDane['EMAIL_D_T_INTVAL']=$this->Main_model->getTimeInterval();
         $this->NaglowekDane['MAIL_RECV']=$this->Main_model->getParameterByShortcut('MAIL_RECV');
