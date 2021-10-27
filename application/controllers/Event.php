@@ -20,10 +20,10 @@ class Event extends CI_Controller{
         if($this->session->login==''){ return self::userNotLoggedIn(); }
         log_message('debug', "[".__METHOD__."]");
         try{
-            $this->Event_model->sign();
+            self::returnJson($this->Event_model->sign()); 
         }
         catch(Exception $e){
-             self::returnJson(self::checkErrorCode($e->getCode(),$e->getMessage())); 
+            self::returnJson(self::checkErrorCode($e->getCode(),$e->getMessage())); 
         }
     }
 

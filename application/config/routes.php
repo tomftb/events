@@ -63,6 +63,7 @@ $route['getParms'] = 'json/getParms';
 $route['getUsers'] = 'json/getUsers';
 $route['main/getEventRecipient/(:num)'] = 'Event/getEventRecipient/$1';
 $route['main/getEvent/(:num)'] = 'Event/getEvent/$1';
+$route['main/getEvents'] = 'Event/getEvents';
 $route['main/eventSign'] = 'Event/eventSign';
 $route['getPerms'] = 'json/getPerms';
 $route['main'] = 'main';

@@ -1,3 +1,4 @@
+var activeModal;
 /*
  * PERMISSION
  */
@@ -15,7 +16,7 @@ var scrollY = $(window).innerHeight() - 540;
 window.tableHandle = $('#dataTable').DataTable(
 {		
     ajax: {
-        url: '/Event/getEvents',
+        url: 'Event/getEvents',
         method: 'GET',
         deferRender: true,
         "dataSrc": "",
@@ -175,9 +176,9 @@ function createButton(type, row)
     if (type === 'display'){
         var event_user_list='';
         if(perm['SHOW_EVENT_USERS']!=='disabled'){
-            event_user_list='<button onclick="ajax(\'getEventRecipient/'+row.id+'\',\'openEventRecipient\',\'GET\',\'\')" class="btn btn-warning">Lista</button>';
+            event_user_list='<button onclick="ajax(\'main/getEventRecipient/'+row.id+'\',\'openEventRecipient\',\'GET\',\'\')" class="btn btn-warning">Lista</button>';
         }
-        return "<div class=\"btn-group pr-0 mr-0\"><button onclick=\"ajax('getEvent/"+row.id+"','openEvent','GET','')\" class=\"btn btn-info\" >Szczegóły</button>"+event_user_list+"</div>";
+        return "<div class=\"btn-group pr-0 mr-0\"><button onclick=\"ajax('main/getEvent/"+row.id+"','openEvent','GET','')\" class=\"btn btn-info\" >Szczegóły</button>"+event_user_list+"</div>";
     }
     else{
         return ''; // NO UPR
@@ -228,25 +229,55 @@ function openEvent(data)
 {
     console.log('---openEvent()---');
     console.log(data);
-    var modal=document.getElementById('adaptedModal').cloneNode(true);
-    console.log(modal);
+    activeModal=document.getElementById('adaptedModal').cloneNode(true);
+    console.log(activeModal);
     /* SETUP HEADER */
-    modal.childNodes[0].childNodes[0].childNodes[0].classList.add('bg-info');
-    modal.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].innerText='Szczegóły wydarzenia';
-    if(!checkEventStatus(modal,data)){ return false; }
+    activeModal.childNodes[0].childNodes[0].childNodes[0].classList.add('bg-info');
+    activeModal.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].innerText='Szczegóły wydarzenia';
+    if(!checkEventStatus(activeModal,data)){ return false; }
     var actionBtn=checkEventRecord(data);
     /* SETUP BODY TITLE */
-    modal.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML="<p class=\"text-center h3\">"+data.event.temat+"</p>";
+    activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML="<p class=\"text-center h3\">"+data.event.temat+"</p>";
     /* SETUP BODY DATA */
-    modal.childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0].innerHTML=data.event.tresc;
+    activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0].innerHTML=data.event.tresc;
     /* SETUP BODY BUTTON */
-    console.log(modal.childNodes[0].childNodes[0].childNodes[1].childNodes[2].childNodes[0]);
-    modal.childNodes[0].childNodes[0].childNodes[1].childNodes[2].childNodes[0].innerHTML='<div class="form-check border-top w-100 mt-3 font-weight-bold"><input type="checkbox" class="form-check-input" id="transport"><label class="form-check-label" for="transport">Czy chcesz skorzystać ze zorganizowanego transportu do i z CKK Jordanki?</label></div><div class="form-check font-weight-bold text-danger"><input type="checkbox" class="form-check-input" id="covid"><label class="form-check-label" for="covid">Deklaruję, że dnia 9.12.2021 będę osobą w pełni zaszczepioną przeciw COVID-19.</label></div><div class="btn-group float-right mb-1 mt-3" role="group" aria-label="BasicGroup"><button class="btn btn-dark" data-dismiss="modal" aria-label="Close">Anuluj</button>'+actionBtn;
+    console.log(activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[2].childNodes[0]);
+    /* SETUP INPUT - BUTTON */
+    activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[2].childNodes[0].innerHTML=eventInput(data.event_fields)+'<div class="btn-group float-right mb-1 mt-3" role="group" aria-label="BasicGroup"><button class="btn btn-dark" data-dismiss="modal" aria-label="Close">Anuluj</button>'+actionBtn;
     /* SETUP BODY LEGEND */
-    modal.childNodes[0].childNodes[0].childNodes[1].childNodes[5].innerHTML='<ul class="border-top w-100" style="list-style-type: square"><li>Zapis możliwy tylko i wyłącznie dla osób w pełni zaszczepionych przeciwko COVID-19.</li></ul>';
+    activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[5].innerHTML='<ul class="border-top w-100 pt-3" style="list-style-type: square"><li>Pola napisane <span class="text-danger">czerwoną</span> czcionką - wymagane.</li><li>Pola napisane czarną czcionką - niewymagane.</li></ul>';
     /* SETUP FOOTER INFO */
-    modal.childNodes[0].childNodes[0].childNodes[2].childNodes[0].childNodes[0].innerHTML="<small class=\"text-secondary\">Autor: "+data.event.autor+" ("+data.event.autor_email+")</small>";    
-    $(modal).modal('show');
+    activeModal.childNodes[0].childNodes[0].childNodes[2].childNodes[0].childNodes[0].innerHTML="<small class=\"text-secondary\">Autor: "+data.event.autor+" ("+data.event.autor_email+")</small>";    
+    $(activeModal).modal('show');
+}
+function eventInput(data){
+    var input='';
+    console.log(data);
+    for(const prop in data){
+        
+        switch(data[prop].type) {
+            case 'checkbox':
+                input+=eventInputCheckbox(data[prop]);
+                break;
+            case 'select':
+                // code block
+                break;
+            case 'input':
+                break
+            default:
+          // code block
+      }
+  }
+  console.log(input);
+  return input;
+}
+function eventInputCheckbox(data){
+    console.log(data);
+    var color='';
+    if(data.req==='y'){
+        color='font-weight-bold text-danger';
+    }
+    return '<div class="form-check w-100 mt-1"><input type="checkbox" class="form-check-input" id="'+data.name+'"><label class="form-check-label '+color+'" for="transport">['+data.name+'] '+data.title+'</label></div>';
 }
 function checkEventStatus(modal,data){
     if(data.status!==''){
@@ -392,7 +423,20 @@ function openEventRecipient(data)
 function checkSignAnswear(data){
     console.log('---checkSignAnswear()---');
     console.log(data);
-    
+    console.log(activeModal);
+    console.log(activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[3].childNodes[0]);
+    /*
+     * SETUP DIV ERROR
+     * 
+     * NO ERROR => HIDE DIV 
+     */
+    if(data.status===''){
+        $(activeModal).modal('hide');
+        activeModal='';
+        return true;
+    }
+    activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[3].childNodes[0].classList.remove('d-none');
+    activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[3].childNodes[0].innerHTML=data.status;
 }
 function sign(eventId){
     console.log('---signUp()---');
@@ -402,5 +446,5 @@ function sign(eventId){
         transport:'n',
         event:eventId
     };
-    ajax('eventSign','checkSignAnswear','POST',value);
+    ajax('main/eventSign','checkSignAnswear','POST',value);
 }
