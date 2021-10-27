@@ -17,10 +17,10 @@ class Event_model extends CI_Model
     public function sign(){
         log_message('debug', "[".__METHOD__."]\r\nSESSION NR EWID => ".$this->session->nrewid);
         /* CHECK EVENT */
-        $this->idEvent=intval($this->input->post('event'),10);
+        $this->idEvent=intval($this->input->post('idEvent'),10);
         $this->post=$this->input->post();
         
-        UNSET($this->post['event']);
+        UNSET($this->post['idEvent']);
         self::checkEvent($this->idEvent);
         /* CHECK SESSION NR EWID */
         if(trim($this->session->nrewid)===''){

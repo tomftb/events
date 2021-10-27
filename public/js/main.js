@@ -232,7 +232,7 @@ function openEvent(data)
     console.log(data);
     activeModal=document.getElementById('adaptedModal').cloneNode(true);
     console.log(activeModal);
-    activeModalFields.event=data.event.id;
+    activeModalFields.idEvent=data.event.id;
     /* SETUP HEADER */
     activeModal.childNodes[0].childNodes[0].childNodes[0].classList.add('bg-info');
     activeModal.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].innerText='Szczegóły wydarzenia';
