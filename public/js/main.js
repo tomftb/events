@@ -1,4 +1,5 @@
 var activeModal;
+var activeModalFields={};
 /*
  * PERMISSION
  */
@@ -231,6 +232,7 @@ function openEvent(data)
     console.log(data);
     activeModal=document.getElementById('adaptedModal').cloneNode(true);
     console.log(activeModal);
+    activeModalFields.event=data.event.id;
     /* SETUP HEADER */
     activeModal.childNodes[0].childNodes[0].childNodes[0].classList.add('bg-info');
     activeModal.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].innerText='Szczegóły wydarzenia';
@@ -249,10 +251,11 @@ function openEvent(data)
     /* SETUP FOOTER INFO */
     activeModal.childNodes[0].childNodes[0].childNodes[2].childNodes[0].childNodes[0].innerHTML="<small class=\"text-secondary\">Autor: "+data.event.autor+" ("+data.event.autor_email+")</small>";    
     $(activeModal).modal('show');
+    console.log(activeModalFields);
 }
 function eventInput(data){
     var input='';
-    console.log(data);
+    //console.log(data);
     for(const prop in data){
         
         switch(data[prop].type) {
@@ -268,12 +271,15 @@ function eventInput(data){
           // code block
       }
   }
-  console.log(input);
+  //console.log(input);
   return input;
 }
 function eventInputCheckbox(data){
     console.log(data);
     var color='';
+    //var field=data.name;
+    activeModalFields[data.name]='n';
+    
     if(data.req==='y'){
         color='font-weight-bold text-danger';
     }
@@ -433,6 +439,9 @@ function checkSignAnswear(data){
     if(data.status===''){
         $(activeModal).modal('hide');
         activeModal='';
+        activeModalFields={
+            
+        };
         return true;
     }
     activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[3].childNodes[0].classList.remove('d-none');
@@ -440,11 +449,5 @@ function checkSignAnswear(data){
 }
 function sign(eventId){
     console.log('---signUp()---');
-    /* check covid */
-    var value={
-        covid:'y',
-        transport:'n',
-        event:eventId
-    };
-    ajax('main/eventSign','checkSignAnswear','POST',value);
+    ajax('main/eventSign','checkSignAnswear','POST',activeModalFields);
 }
