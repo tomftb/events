@@ -48,7 +48,7 @@ window.tableHandle = $('#dataTable').DataTable(
         text: '<i class="fa fa-download"></i> Odśwież wydarzenia',
         className: 'btn btn-info',
         action: function (e, dt, node, config){
-            reloadData();
+            reloadMainTable();
         }
     },
     {
@@ -165,13 +165,7 @@ window.tableHandle.columns().every(function (id,value)
         }
     });
 });
-$(document).keyup(function(e)
-{
-    if (e.key === "Escape"){ 
-        // escape key maps to keycode `27`
-       reloadData();
-    }
-});
+
 function createButton(type, row)
 {
     if (type === 'display'){
@@ -236,6 +230,9 @@ function openEvent(data)
     /* SETUP HEADER */
     activeModal.childNodes[0].childNodes[0].childNodes[0].classList.add('bg-info');
     activeModal.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].innerText='Szczegóły wydarzenia';
+    /* SETUP HEADER CLOSE BUTTON */
+    console.log(activeModal.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0]);
+    activeModal.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].onclick = function() {reloadMainTable();};
     if(!checkEventStatus(activeModal,data)){ return false; }
     var actionBtn=checkEventRecord(data);
     /* SETUP BODY TITLE */
@@ -245,7 +242,7 @@ function openEvent(data)
     /* SETUP BODY BUTTON */
     console.log(activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[2].childNodes[0]);
     /* SETUP INPUT - BUTTON */
-    activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[2].childNodes[0].innerHTML=eventInput(data.event_fields)+'<div class="btn-group float-right mb-1 mt-3" role="group" aria-label="BasicGroup"><button class="btn btn-dark" data-dismiss="modal" aria-label="Close">Anuluj</button>'+actionBtn;
+    activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[2].childNodes[0].innerHTML=eventInput(data.event_fields)+'<div class="btn-group float-right mb-1 mt-3" role="group" aria-label="BasicGroup"><button class="btn btn-dark" data-dismiss="modal" aria-label="Close" onClick="reloadMainTable()">Anuluj</button>'+actionBtn;
     /* SETUP BODY LEGEND */
     activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[5].innerHTML='<ul class="border-top w-100 pt-3" style="list-style-type: square"><li>Pola napisane <span class="text-danger">czerwoną</span> czcionką - wymagane.</li><li>Pola napisane czarną czcionką - niewymagane.</li></ul>';
     /* SETUP FOOTER INFO */
@@ -279,11 +276,28 @@ function eventInputCheckbox(data){
     var color='';
     //var field=data.name;
     activeModalFields[data.name]='n';
-    
     if(data.req==='y'){
         color='font-weight-bold text-danger';
     }
-    return '<div class="form-check w-100 mt-1"><input type="checkbox" class="form-check-input" id="'+data.name+'"><label class="form-check-label '+color+'" for="transport">['+data.name+'] '+data.title+'</label></div>';
+    /* ADD ACTION ONCLICK*/
+    return '<div class="form-check w-100 mt-1"><input type="checkbox" class="form-check-input" value="n" name="'+data.name+'" onClick="changeCheckboxValue(this)"><label class="form-check-label '+color+'" for="transport">['+data.name+'] '+data.title+'</label></div>';
+}
+function changeCheckboxValue(ele){
+    console.log('---changeCheckboxValue()---');
+    /*
+    console.log(ele);
+    console.log(ele.name);
+    console.log(ele.value);
+    console.log(activeModalFields);
+     */
+    if(ele.value==='n'){
+        activeModalFields[ele.name]='y';
+        ele.value='y';
+    }
+    else{
+        activeModalFields[ele.name]='n';
+        ele.value='n';
+    }
 }
 function checkEventStatus(modal,data){
     if(data.status!==''){
@@ -407,10 +421,10 @@ function openEventRecipient(data)
         modal.childNodes[0].childNodes[0].childNodes[0].classList.add('bg-warning');
         modal.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].innerText='Lista zapisanych';
         console.log(modal.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0]);
-        /* SETUP BODY TITLE*/
+        /* SETUP BODY TITLE */
         console.log(modal.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0]);
         modal.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML="<p class=\"text-center h3\">"+data.event.temat+"</p>";
-        /* SETUP BODY DATA*/
+        /* SETUP BODY DATA */
         var table=document.getElementById('dynamicDataTableDiv').cloneNode(true); 
             setDynamicTable(table.childNodes[0],data.recipient,columns); 
             console.log(modal.childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0]);
@@ -451,3 +465,15 @@ function sign(eventId){
     console.log('---signUp()---');
     ajax('main/eventSign','checkSignAnswear','POST',activeModalFields);
 }
+function reloadMainTable()
+{
+    console.log('---reloadMainTable()---');
+    window.tableHandle.ajax.reload(null, false);
+}
+$(document).keyup(function(e)
+{
+    if (e.key === "Escape"){ 
+        // escape key maps to keycode `27`
+       reloadMainTable();
+    }
+});
