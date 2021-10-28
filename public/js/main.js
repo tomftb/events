@@ -274,13 +274,22 @@ function eventInput(data){
 function eventInputCheckbox(data){
     console.log(data);
     var color='';
+    var checked='';
     //var field=data.name;
-    activeModalFields[data.name]='n';
+    
     if(data.req==='y'){
         color='font-weight-bold text-danger';
     }
+    if(data.value==='y'){
+        checked='checked';
+        activeModalFields[data.name]=data.value;
+    }
+    else{
+        /* FOR NULL AND n */
+        activeModalFields[data.name]='n';
+    }
     /* ADD ACTION ONCLICK*/
-    return '<div class="form-check w-100 mt-1"><input type="checkbox" class="form-check-input" value="n" name="'+data.name+'" onClick="changeCheckboxValue(this)"><label class="form-check-label '+color+'" for="transport">['+data.name+'] '+data.title+'</label></div>';
+    return '<div class="form-check w-100 mt-1"><input type="checkbox" '+checked+' class="form-check-input" value="n" name="'+data.name+'" onClick="changeCheckboxValue(this)"><label class="form-check-label '+color+'" for="transport">['+data.name+'] '+data.title+'</label></div>';
 }
 function changeCheckboxValue(ele){
     console.log('---changeCheckboxValue()---');
@@ -290,13 +299,13 @@ function changeCheckboxValue(ele){
     console.log(ele.value);
     console.log(activeModalFields);
      */
-    if(ele.value==='n'){
-        activeModalFields[ele.name]='y';
-        ele.value='y';
-    }
-    else{
+    if(ele.value==='y'){
         activeModalFields[ele.name]='n';
         ele.value='n';
+    }
+    else{
+        activeModalFields[ele.name]='y';
+        ele.value='y';
     }
 }
 function checkEventStatus(modal,data){

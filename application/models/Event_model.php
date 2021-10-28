@@ -150,7 +150,7 @@ class Event_model extends CI_Model
     {
         log_message('debug', "[".__METHOD__."] CURRENT DATE TIME - ".$this->timestamp);
         $event = self::checkEvent($idEvent);
-        $event_fields = $this->db->query("SELECT `name`,`title`,`req`,`type` FROM `events_field` WHERE `id_event`=".$idEvent." AND `active`='y' ")->result_array();
+        $event_fields = $this->db->query("SELECT e.`name`,e.`title`,e.`req`,e.`type`,ef.`value` FROM `events_field` e LEFT JOIN `events_recipient_field` ef ON e.`id`=ef.`id_event_field` AND ef.`id_event_recipient`=(SELECT r.`id` FROM events_recipient r WHERE r.`id_event`=".$idEvent." AND r.`recipient_nrewid`=".$this->session->nrewid.") WHERE e.`id_event`=".$idEvent." AND e.`active`='y' ")->result_array();
         /* SETUP EVENT READ */
         self::setEventRead($idEvent);
         return (array('event'=>$event,'event_fields'=>$event_fields,'status'=>''));
