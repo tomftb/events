@@ -30,6 +30,7 @@ class Login extends CI_Controller
         {
             log_message('debug', "[".__METHOD__."] login = TRUE");
             $this->setUpSession();
+            $this->Login_model->insertLog('Zalogowano się do aplikacji');
             redirect(base_url()."main");
         }    
     }
@@ -51,7 +52,7 @@ class Login extends CI_Controller
              // CHECK PERM
             if ($this->login)
             {
-                $this->runCheckLoginPerm();
+                $this->runCheckLoginPerm(); 
             }
         }
         else

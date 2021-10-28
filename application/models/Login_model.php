@@ -104,4 +104,7 @@ class Login_model extends CI_Model
         }
         return ($merge);
     }   
+    public function insertLog($msg=''){
+        $this->db->query('INSERT INTO `log` (`action`,`user_id`,`user_name`,`user_email`,`date`,`host`,`session`) VALUES ("'.$msg.'","'.$this->session->userid.'","'.$this->session->fullname.'","'.$this->session->email.'","'.date("Y-m-d H:i:s").'","'.$this->input->ip_address().'","'.$this->session->token.'")');
+    }
 }
