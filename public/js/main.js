@@ -222,16 +222,16 @@ function setReadStatus(type,wskr,data)
 }
 function openEvent(data)
 {
-    console.log('---openEvent()---');
-    console.log(data);
+    //console.log('---openEvent()---');
+    //console.log(data);
     activeModal=document.getElementById('adaptedModal').cloneNode(true);
-    console.log(activeModal);
+    //console.log(activeModal);
     activeModalFields.idEvent=data.event.id;
     /* SETUP HEADER */
     activeModal.childNodes[0].childNodes[0].childNodes[0].classList.add('bg-info');
     activeModal.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].innerText='Szczegóły wydarzenia';
     /* SETUP HEADER CLOSE BUTTON */
-    console.log(activeModal.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0]);
+    //console.log(activeModal.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0]);
     activeModal.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].onclick = function() {reloadMainTable();};
     if(!checkEventStatus(activeModal,data)){ return false; }
     var actionBtn=checkEventRecord(data);
@@ -240,7 +240,7 @@ function openEvent(data)
     /* SETUP BODY DATA */
     activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0].innerHTML=data.event.tresc;
     /* SETUP BODY BUTTON */
-    console.log(activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[2].childNodes[0]);
+    //console.log(activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[2].childNodes[0]);
     /* SETUP INPUT - BUTTON */
     activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[2].childNodes[0].innerHTML=eventInput(data.event_fields)+'<div class="btn-group float-right mb-1 mt-3" role="group" aria-label="BasicGroup"><button class="btn btn-dark" data-dismiss="modal" aria-label="Close" onClick="reloadMainTable()">Anuluj</button>'+actionBtn;
     /* SETUP BODY LEGEND */
@@ -248,7 +248,7 @@ function openEvent(data)
     /* SETUP FOOTER INFO */
     activeModal.childNodes[0].childNodes[0].childNodes[2].childNodes[0].childNodes[0].innerHTML="<small class=\"text-secondary\">Autor: "+data.event.autor+" ("+data.event.autor_email+")</small>";    
     $(activeModal).modal('show');
-    console.log(activeModalFields);
+    //console.log(activeModalFields);
 }
 function eventInput(data){
     var input='';
@@ -272,7 +272,7 @@ function eventInput(data){
   return input;
 }
 function eventInputCheckbox(data){
-    console.log(data);
+    //console.log(data);
     var color='';
     var checked='';
     //var field=data.name;
@@ -292,7 +292,7 @@ function eventInputCheckbox(data){
     return '<div class="form-check w-100 mt-1"><input type="checkbox" '+checked+' class="form-check-input" value="n" name="'+data.name+'" onClick="changeCheckboxValue(this)"><label class="form-check-label '+color+'" for="transport">['+data.name+'] '+data.title+'</label></div>';
 }
 function changeCheckboxValue(ele){
-    console.log('---changeCheckboxValue()---');
+    //console.log('---changeCheckboxValue()---');
     /*
     console.log(ele);
     console.log(ele.name);
@@ -367,7 +367,7 @@ function setDynamicTable(html,dataSet,columns)
   });
 }
 function ajax(url,task,method,data){
-    console.log('---getEventRecipient()---\nURL: '+url+'\nTASK: '+task);
+    //console.log('---getEventRecipient()---\nURL: '+url+'\nTASK: '+task);
     /* DATA IS OBJECT */
     $.ajax(
     {
@@ -384,43 +384,43 @@ function ajax(url,task,method,data){
         data,
         method: method,
         success: function (answer){
-            console.log('---AJAX SUCCESS---');
-            console.log(answer);
+           // console.log('---AJAX SUCCESS---');
+           // console.log(answer);
             //(new Function(`${task}('${answer}')`))();
             window[task](answer);
         },
         error: function (request, status, error)
         {
-            console.log('---AJAX ERROR---');
-            console.log(request);
-            console.log(error+' '+status);
+            //console.log('---AJAX ERROR---');
+            //console.log(request);
+            //console.log(error+' '+status);
             alert('Error occured!');
         }
     });  
 }
 function openEventRecipient(data)
 {
-    console.log('---openEventRecipient()---\nData:');
+    //console.log('---openEventRecipient()---\nData:');
     try {
-        console.log(data);
+        //console.log(data);
         var modal=document.getElementById('adaptedModal').cloneNode(true);
-        console.log(modal);
-        console.log(modal.childNodes[0].childNodes[0].childNodes[0]);
+        //console.log(modal);
+        //console.log(modal.childNodes[0].childNodes[0].childNodes[0]);
         /* SETUP HEADER */
         modal.childNodes[0].childNodes[0].childNodes[0].classList.add('bg-warning');
         modal.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].innerText='Lista zapisanych';
-        console.log(modal.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0]);
+        //console.log(modal.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0]);
         /* SETUP BODY TITLE */
-        console.log(modal.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0]);
+        //console.log(modal.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0]);
         modal.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML="<p class=\"text-center h3\">"+data.event.temat+"</p>";
         /* SETUP BODY DATA */
         var table=document.getElementById('dynamicDataTableDiv').cloneNode(true); 
             setDynamicTable(table.childNodes[0],data.recipient,data.event.fields); 
-            console.log(modal.childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0]);
+            //console.log(modal.childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0]);
             modal.childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0].appendChild(table);
             
         /* SETUP FOOTER INFO */
-        console.log(modal.childNodes[0].childNodes[0].childNodes[2].childNodes[0].childNodes[0].childNodes[0]);
+        //console.log(modal.childNodes[0].childNodes[0].childNodes[2].childNodes[0].childNodes[0].childNodes[0]);
         modal.childNodes[0].childNodes[0].childNodes[2].childNodes[0].childNodes[0].innerHTML="<small class=\"text-secondary\">Autor: "+data.event.autor+" ("+data.event.autor_email+")</small>";
         /* SHOW */
         $(modal).modal('show');
@@ -430,10 +430,12 @@ function openEventRecipient(data)
     }
 }
 function checkSignAnswear(data){
+    /*
     console.log('---checkSignAnswear()---');
     console.log(data);
     console.log(activeModal);
     console.log(activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[3].childNodes[0]);
+    */
     /*
      * SETUP DIV ERROR
      * 
@@ -445,6 +447,7 @@ function checkSignAnswear(data){
         activeModalFields={
             
         };
+        reloadMainTable();
         return true;
     }
     activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[3].childNodes[0].classList.remove('d-none');
@@ -456,7 +459,7 @@ function sign(eventId){
 }
 function reloadMainTable()
 {
-    console.log('---reloadMainTable()---');
+    //console.log('---reloadMainTable()---');
     window.tableHandle.ajax.reload(null, false);
 }
 $(document).keyup(function(e)

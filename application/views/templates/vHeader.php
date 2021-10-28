@@ -64,15 +64,15 @@ $uid=uniqid();
                 <nav id="nav-menu-container " style="border:0px solid red;">
                   <ul id="nav-header-menu" class="nav-menu pull-right" onclick="setMenuActive()">
                       <li id="main"><i class="fa fa-camera-retro" aria-hidden="true"></i><a href="<?=$link?>">WYDARZENIA</a></li>
-                      <!-- <li id="li-2"><i class="fa fa-address-card-o" aria-hidden="true"></i><a href="<?php echo $link."2"; ?>">Projekty</a></li>-->
-                      <!-- <li id="li-3"><i class="fa fa-user-circle-o" aria-hidden="true"></i><a href="<?php echo $link."3"; ?>">Pracownicy</a></li>-->
-                      <li id="showAdmin"><i class="fa fa-cog" aria-hidden="true"></i><a href="<?php echo $link."showAdmin"; ?>"> Administrator</a>
+                      <!-- <li id="li-2"><i class="fa fa-address-card-o" aria-hidden="true"></i><a href="<?php echo $link."/2"; ?>">Projekty</a></li>-->
+                      <!-- <li id="li-3"><i class="fa fa-user-circle-o" aria-hidden="true"></i><a href="<?php echo $link."/3"; ?>">Pracownicy</a></li>-->
+                      <li id="showAdmin"><i class="fa fa-cog" aria-hidden="true"></i><a href="<?php echo $link."/showAdmin"; ?>"> Administrator</a>
                           <ul  class="mt-0 ml-0 nav-menu" onclick="setMenuActive()">
-                            <li id="showUsers"><a href="<?php echo $link."showUsers"; ?>">Użytkownicy</a></li>
-                            <li id="showPerms"><a href="<?php echo $link."showPerms"; ?>">Uprawnienia</a></li>
-                            <li id="showRole"><a href="<?php echo $link."showRole"; ?>">Role</a></li>
+                            <li id="showUsers"><a href="<?php echo $link."/showUsers"; ?>">Użytkownicy</a></li>
+                            <li id="showPerms"><a href="<?php echo $link."/showPerms"; ?>">Uprawnienia</a></li>
+                            <li id="showRole"><a href="<?php echo $link."/showRole"; ?>">Role</a></li>
                             <!-- <li id="li-8"><a href="<?php //echo $link."8"; ?>">Opcje</a></li> -->
-                            <li id="showParms"><a href="<?php echo $link."showParms"; ?>">Parametry</a></li>
+                            <li id="showParms"><a href="<?php echo $link."/showParms"; ?>">Parametry</a></li>
                           </ul>
                         </li>
                     <li><i class="fa fa-sign-out" aria-hidden="true"></i><a href="<?php echo $url."logout"; ?>"> Wyloguj</a></li>

@@ -32,7 +32,7 @@ class Event_model extends CI_Model
         
         (!$event_record->id || $event_record->status==='n') ? self::up($event_record->id) : self::off($event_record->id);
         
-        Throw new exception ('test',-1);
+        //Throw new exception ('test',-1);
         return array('status'=>'');
     }
     private function up($id=0){
@@ -154,7 +154,7 @@ class Event_model extends CI_Model
         ];
         
         $recipient=$this->db->query("SELECT er.`id`,er.`recipient_nrewid`,er.`recipient_name`,er.`recipient_email` FROM `events_recipient` er WHERE er.`id_event`=${id} AND er.`status`='y'")->result_array();
-        $event_fields=$this->db->query("SELECT e.`id`,e.`name`,e.`title` FROM `events_field` e WHERE e.`id_event`=".$id." AND e.`active`='y' and e.`visible`='y'")->result_array();
+        $event_fields=$this->db->query("SELECT e.`id`,e.`name`,e.`title` FROM `events_field` e WHERE e.`id_event`=".$id." AND e.`active`='y' and e.`visible`='y' order by e.`id` desc")->result_array();
         
         self::setEventFields($event->fields,$event_fields,$id);
         self::setEventRecipientFields($recipient,$event_fields,$id);

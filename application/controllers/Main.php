@@ -138,7 +138,7 @@ class Main extends CI_Controller
         $this->NaglowekDane['userlogin']=$this->userData[0]['login'];
         $this->NaglowekDane['useremail']=$this->userData[0]['email'];
         $this->NaglowekDane['url']=base_url();
-        $this->NaglowekDane['link']=base_url().$this->uri->segment(1)."/";
+        $this->NaglowekDane['link']=base_url().$this->uri->segment(1);
         //$this->NaglowekDane['acl']=$this->Main_model->setUserAcl();
         $this->NaglowekDane['acl']=$this->session->perm;
         $this->NaglowekDane['js_setuserpermission']=base_url()."js/setUserPermission.js";

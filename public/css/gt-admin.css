@@ -21,6 +21,32 @@ body{
 .gt-border-light-blue{
     border:1px solid #80bfff;
 }
+.gt-font-bold{
+    font-family: 'Lato', sans-serif;
+    font-weight:bold;
+}
+.gt-font
+{
+    font-family: 'Lato', sans-serif;
+}
+.gt-bg-color-green{
+    background-color:#62bb46; 
+}
+.gt-bg-color-purple{
+    background-color:#db4dff; 
+}
+.gt-bg-color-orange{
+    background-color:#f7941d;
+}
+.gt-color-green{
+    color:#62bb46;
+}
+.gt-color-orange{
+    color:#f7941d;
+}
+.gt-color-purple{
+    color:#db4dff; 
+}
 .modal-open {
   position: fixed;
   overflow: scroll;
