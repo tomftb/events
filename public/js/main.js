@@ -225,7 +225,7 @@ function openEvent(data)
     //console.log('---openEvent()---');
     //console.log(data);
     activeModal=document.getElementById('adaptedModal').cloneNode(true);
-    //console.log(activeModal);
+    console.log(activeModal);
     activeModalFields.idEvent=data.event.id;
     /* SETUP HEADER */
     activeModal.childNodes[0].childNodes[0].childNodes[0].classList.add('bg-info');
@@ -234,7 +234,6 @@ function openEvent(data)
     //console.log(activeModal.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0]);
     activeModal.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].onclick = function() {reloadMainTable();};
     if(!checkEventStatus(activeModal,data)){ return false; }
-    var actionBtn=checkEventRecord(data);
     /* SETUP BODY TITLE */
     activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML="<p class=\"text-center h3\">"+data.event.temat+"</p>";
     /* SETUP BODY DATA */
@@ -242,9 +241,9 @@ function openEvent(data)
     /* SETUP BODY BUTTON */
     //console.log(activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[2].childNodes[0]);
     /* SETUP INPUT - BUTTON */
-    activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[2].childNodes[0].innerHTML=eventInput(data.event_fields)+'<div class="btn-group float-right mb-1 mt-3" role="group" aria-label="BasicGroup"><button class="btn btn-dark" data-dismiss="modal" aria-label="Close" onClick="reloadMainTable()">Anuluj</button>'+actionBtn;
+    activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[2].childNodes[0].innerHTML='<div class="btn-group float-right mb-1 mt-3 " role="group" aria-label="BasicGroup"><button class="btn btn-dark" data-dismiss="modal" aria-label="Close" onClick="reloadMainTable()">Anuluj</button>'+checkEventRecord(data)+'</div>';
     /* SETUP BODY LEGEND */
-    activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[5].innerHTML='<ul class="border-top w-100 pt-3" style="list-style-type: square"><li>Pola napisane <span class="text-danger">czerwoną</span> czcionką - wymagane.</li><li>Pola napisane czarną czcionką - niewymagane.</li></ul>';
+    activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[5].innerHTML='<div class="border-top col-12 mt-2 mb-2"><div>Dobrowolne Oświadczenie</div>'+eventInput(data.event_fields)+'</div><ul class="border-top w-100 pt-3" style="list-style-type: square"><li>Pola napisane <span class="text-danger">czerwoną</span> czcionką - wymagane.</li><li>Pola napisane czarną czcionką - niewymagane.</li></ul>';
     /* SETUP FOOTER INFO */
     activeModal.childNodes[0].childNodes[0].childNodes[2].childNodes[0].childNodes[0].innerHTML="<small class=\"text-secondary\">Autor: "+data.event.autor+" ("+data.event.autor_email+")</small>";    
     $(activeModal).modal('show');
@@ -319,8 +318,8 @@ function checkEventStatus(modal,data){
     return true;
 }
 function checkEventRecord(data){
-    var yes='<button class="btn btn-primary" onClick="sign('+data.event.id+')">Zapisz mnie</button></div>';
-    var no='<button class="btn btn-danger" onClick="sign('+data.event.id+')">Wypisz mnie</button></div>';
+    var yes='<button class="btn btn-primary" onClick="sign('+data.event.id+')">Zapisz mnie</button>';
+    var no='<button class="btn btn-danger" onClick="sign('+data.event.id+')">Wypisz mnie</button>';
     if(data.event.recipient_id===null || (data.event.recipient_id!==null && data.event.recipient_status!=='y')){
         return yes; 
     }

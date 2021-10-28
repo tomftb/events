@@ -117,8 +117,9 @@ class Event_model extends CI_Model
         }
     }
     private function checkSignKeyReq($key,$type,$req){
+        log_message('debug', "[".__METHOD__."]\r\nKEY: $key\r\nTYPE: $type\r\nREQ: ".$req);
         /* CHECK EVENT CHECKBOX */
-        if($req==='y' && $this->post[$key]==='y' && $type==='checkbox'){
+        if($req==='y' && $this->post[$key]!=='y' && $type==='checkbox'){
             Throw new Exception('Nie zaznaczono - '.$key,-1);
         }
         /* CHECK EVENT INPUT */ 
