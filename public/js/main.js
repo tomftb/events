@@ -403,26 +403,6 @@ function openEventRecipient(data)
     console.log('---openEventRecipient()---\nData:');
     try {
         console.log(data);
-        var columns=[
-            {
-                title:"Nr ewid",
-                data: 'recipient_nrewid',
-                search:  null,  
-                orderable:false
-            },
-            {
-                title:"Nazwisko Imię",
-                data: 'recipient_name',
-                search:  null,  
-                orderable:false
-            },
-            {
-                title:"E-mail",
-                data: 'recipient_email',
-                search:  null,  
-                orderable:false
-            }
-        ];
         var modal=document.getElementById('adaptedModal').cloneNode(true);
         console.log(modal);
         console.log(modal.childNodes[0].childNodes[0].childNodes[0]);
@@ -435,7 +415,7 @@ function openEventRecipient(data)
         modal.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML="<p class=\"text-center h3\">"+data.event.temat+"</p>";
         /* SETUP BODY DATA */
         var table=document.getElementById('dynamicDataTableDiv').cloneNode(true); 
-            setDynamicTable(table.childNodes[0],data.recipient,columns); 
+            setDynamicTable(table.childNodes[0],data.recipient,data.event.fields); 
             console.log(modal.childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0]);
             modal.childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0].appendChild(table);
             

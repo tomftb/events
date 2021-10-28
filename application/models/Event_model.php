@@ -130,10 +130,59 @@ class Event_model extends CI_Model
         /* CHECK EVENT */
         /* SETUP EVENT READ */
         self::setEventRead($id);
-        $event=$this->db->query("SELECT `temat`,`autor`,`autor_email`,`odbiorca`,`odbiorca_email` FROM `events` WHERE `id`=${id} ")->row();
-        $recipient=$this->db->query("SELECT `recipient_nrewid`,`recipient_name`,`recipient_email` FROM `events_recipient` WHERE `id_event`=${id} AND `status`='y' ")->result_array();
+        $event=$this->db->query("SELECT `temat`,`autor`,`autor_email`,`odbiorca`,`odbiorca_email` FROM `events` WHERE `id`=${id} ")->row();   
+        $event->fields=[
+            [
+                'title'=>'Nr ewid',
+                'data'=>'recipient_nrewid',
+                'search'=>  null,  
+                'orderable'=>true
+            ],
+            [
+                'title'=>'Nazwisko Imię',
+                'data'=>'recipient_name',
+                'search'=>  null,  
+                'orderable'=>true
+                
+            ],
+            [
+                'title'=>'E-mail',
+                'data'=>'recipient_email',
+                'search'=>  null,  
+                'orderable'=>true
+            ]
+        ];
+        
+        $recipient=$this->db->query("SELECT er.`id`,er.`recipient_nrewid`,er.`recipient_name`,er.`recipient_email` FROM `events_recipient` er WHERE er.`id_event`=${id} AND er.`status`='y'")->result_array();
+        $event_fields=$this->db->query("SELECT e.`id`,e.`name`,e.`title` FROM `events_field` e WHERE e.`id_event`=".$id." AND e.`active`='y' and e.`visible`='y'")->result_array();
+        
+        self::setEventFields($event->fields,$event_fields,$id);
+        self::setEventRecipientFields($recipient,$event_fields,$id);
         return array('event'=>$event,'recipient'=>$recipient);
-    
+    }
+    private function setEventFields(&$fields,$event_fields){
+        log_message('debug', "[".__METHOD__."]");
+        
+        foreach($event_fields as $v){
+            log_message('debug', "[".__METHOD__."]\r\nID:\t\t".$v['id']."\r\nNAME:\t".$v['name']."\r\nTITLE:\t".$v['title']);
+            /* SET COLUMN TABLE FIELD NAME */
+            array_push($fields,[
+                'title'=>$v['name'],
+                'data'=>'recipient_'.$v['name'],
+                'search'=>  null,  
+                'orderable'=>true
+            ]);    
+        }
+    }
+    private function setEventRecipientFields(&$recipient,$event_fields){
+        foreach($recipient as $rk => $rv){
+            log_message('debug', "[".__METHOD__."]\r\nNR EWID:\t\t".$rv['recipient_nrewid']);
+            /* SET RECIPIENT VALUE */
+            foreach($event_fields as $fv){
+                log_message('debug', "[".__METHOD__."]\r\nID FIELD:\t".$fv['id']."\r\nNAME:\t".$fv['name']);
+                $recipient[$rk]['recipient_'.$fv['name']]=$this->db->query("SELECT erf.`value` FROM events_recipient_field erf WHERE erf.`id_event_field`=".$fv['id']." AND erf.`id_event_recipient`=".$rv['id'])->row()->value;
+            }
+        }
     }
     public function getEvents($idcat=1)
     {
