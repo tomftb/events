@@ -66,11 +66,11 @@ class Login extends CI_Controller
         log_message('debug', "[".__METHOD__."]");
         if($this->session->user!='' && $this->session->token!='')
         {
-            echo "sessio not empty";
-            echo "<pre>";
-            print_r($this->session);
-            echo "</pre>";
-            echo $this->session->user."<br/>";
+            //echo "sessio not empty";
+            //echo "<pre>";
+            //print_r($this->session);
+            //echo "</pre>";
+            //echo $this->session->user."<br/>";
             //die();
             redirect(base_url()."main");
         }
