@@ -243,7 +243,8 @@ function openEvent(data)
     /* SETUP INPUT - BUTTON */
     activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[2].childNodes[0].innerHTML='<div class="btn-group float-right mb-1 mt-3 " role="group" aria-label="BasicGroup"><button class="btn btn-dark" data-dismiss="modal" aria-label="Close" onClick="reloadMainTable()">Anuluj</button>'+checkEventRecord(data)+'</div>';
     /* SETUP BODY LEGEND */
-    activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[5].innerHTML='<div class="border-top col-12 mt-2 mb-2"><div>Dobrowolne Oświadczenie</div>'+eventInput(data.event_fields)+'</div><ul class="border-top w-100 pt-3" style="list-style-type: square"><li>Pola napisane <span class="text-danger">czerwoną</span> czcionką - wymagane.</li><li>Pola napisane czarną czcionką - niewymagane.</li></ul>';
+    activeModal.childNodes[0].childNodes[0].childNodes[1].childNodes[5].innerHTML='<div class="border-top col-12 mt-2 mb-2"><div>Dobrowolne Oświadczenie</div>'+eventInput(data.event_fields)+'</div>';
+    //<ul class="border-top w-100 pt-3" style="list-style-type: square"><li>Pola napisane <span class="text-danger">czerwoną</span> czcionką - wymagane.</li><li>Pola napisane czarną czcionką - niewymagane.</li></ul>';
     /* SETUP FOOTER INFO */
     activeModal.childNodes[0].childNodes[0].childNodes[2].childNodes[0].childNodes[0].innerHTML="<small class=\"text-secondary\">Autor: "+data.event.autor+" ("+data.event.autor_email+")</small>";    
     $(activeModal).modal('show');
