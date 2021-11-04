@@ -289,7 +289,7 @@ function eventInputCheckbox(data){
         activeModalFields[data.name]='n';
     }
     /* ADD ACTION ONCLICK*/
-    return '<div class="form-check w-100 mt-1"><input type="checkbox" '+checked+' class="form-check-input" value="n" name="'+data.name+'" onClick="changeCheckboxValue(this)"><label class="form-check-label '+color+'" for="transport">['+data.name+'] '+data.title+'</label></div>';
+    return '<div class="form-check w-100 mt-1"><input type="checkbox" '+checked+' class="form-check-input" value="n" name="'+data.name+'" onClick="changeCheckboxValue(this)"><label class="form-check-label" for="'+data.name+'"><span class="'+color+'">['+data.name+']</span> '+data.title+'</label></div>';
 }
 function changeCheckboxValue(ele){
     //console.log('---changeCheckboxValue()---');
