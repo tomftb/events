@@ -48,7 +48,7 @@ $password = array(
         ?>
       <!-- FOOTER -->
     <div id="formFooter">
-      <p class="small text-left text-secondary gt-font">* Logowanie przy użyciu konta MS Active Directory.</p>
+        <p class="text-left text-secondary gt-font">* Logowanie przy użyciu konta MS Active Directory.<br/><span class="text-primary">(Konto wykorzystywane przy logowaniu się do komputera/laptopa)</span></p>
     </div>
   </div>
 </div>

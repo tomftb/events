@@ -21,7 +21,10 @@ class Event_model extends CI_Model
         $this->post=$this->input->post();
         
         UNSET($this->post['idEvent']);
-        self::checkEvent($this->idEvent);
+        $event=self::checkEvent($this->idEvent);
+        if($this->timestamp>$event->data_koniec){
+           Throw new Exception('Przekroczono termin zapisu (wprowadzenia zmian)!',-1);
+        }
         /* CHECK SESSION NR EWID */
         if(trim($this->session->nrewid)===''){
             Throw new Exception('Użytkownik nie ma wprowadzonego numeru ewidencyjnego w Active Directory',-1);
@@ -188,7 +191,8 @@ class Event_model extends CI_Model
     public function getEvents($idcat=1)
     {
         log_message('debug', "[".__METHOD__."] CURRENT DATE TIME - ".$this->timestamp);
-        $query = $this->db->query("SELECT e.id,e.temat,e.autor,e.autor_email,e.odbiorca,e.odbiorca_email,FROM_UNIXTIME(e.data_koniec) as data_koniec,data_dod  as data_dod,(select er.status from events_recipient er where er.id_event=e.id AND er.recipient_nrewid=".$this->session->nrewid." ) as status FROM events e WHERE  e.data_koniec>=".$this->timestamp." AND e.wsk_u='0' AND e.id_cat=$idcat order by e.id desc");
+        /* e.data_koniec>=".$this->timestamp." AND  */
+        $query = $this->db->query("SELECT e.id,e.temat,e.autor,e.autor_email,e.odbiorca,e.odbiorca_email,FROM_UNIXTIME(e.data_koniec) as data_koniec,data_dod  as data_dod,(select er.status from events_recipient er where er.id_event=e.id AND er.recipient_nrewid=".$this->session->nrewid." ) as status FROM events e WHERE  e.wsk_u='0' AND e.id_cat=$idcat order by e.id desc");
         $events=$query->result_array();
         foreach($events as $k => $v){
             $events[$k]['temat']=html_entity_decode($v['temat'],ENT_QUOTES);
@@ -214,9 +218,9 @@ class Event_model extends CI_Model
         if($event->wsk_u!=='0'){
             Throw new Exception('Wydarzenie zostało usunięte!',-1);
         }
-        if($this->timestamp>$event->data_koniec){
-            Throw new Exception('Przekroczono termin zapisu!',-1);
-        }
+        //if($this->timestamp>$event->data_koniec){
+         //   Throw new Exception('Przekroczono termin zapisu!',-1);
+        //}
         unset($event->wsk_u);
         return $event;
     }

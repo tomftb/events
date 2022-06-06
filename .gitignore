@@ -5,3 +5,4 @@ error.log
 access_php56.log
 error_php56.log
 /nbproject/private/
+nbproject/*
